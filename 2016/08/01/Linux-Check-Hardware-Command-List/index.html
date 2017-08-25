@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/se7en.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一：查看cpu123more /proc/cpuinfo | grep &quot;model name&quot;grep &quot;model name&quot; /proc/cpuinfo 如果觉得需要看的更加舒服 1grep &quot;model name&quot; /proc/cpuinfo | cut -f2 -d: 二：查看内存12345grep MemTotal /proc/meminfogrep MemTotal /proc/me">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 系统信息查看命令">
+<meta property="og:url" content="https://lijiuning.github.io/2016/08/01/Linux-Check-Hardware-Command-List/index.html">
+<meta property="og:site_name" content="SE7EN">
+<meta property="og:description" content="一：查看cpu123more /proc/cpuinfo | grep &quot;model name&quot;grep &quot;model name&quot; /proc/cpuinfo 如果觉得需要看的更加舒服 1grep &quot;model name&quot; /proc/cpuinfo | cut -f2 -d: 二：查看内存12345grep MemTotal /proc/meminfogrep MemTotal /proc/me">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-25T13:05:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 系统信息查看命令">
+<meta name="twitter:description" content="一：查看cpu123more /proc/cpuinfo | grep &quot;model name&quot;grep &quot;model name&quot; /proc/cpuinfo 如果觉得需要看的更加舒服 1grep &quot;model name&quot; /proc/cpuinfo | cut -f2 -d: 二：查看内存12345grep MemTotal /proc/meminfogrep MemTotal /proc/me">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lijiuning.github.io/2016/08/01/Linux-Check-Hardware-Command-List/"/>
+
+
+
+
+
+  <title>Linux 系统信息查看命令 | SE7EN</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SE7EN</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-coffee"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lijiuning.github.io/2016/08/01/Linux-Check-Hardware-Command-List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lim Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SE7EN">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux 系统信息查看命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-01T12:42:54+08:00">
+                2016-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一：查看cpu"><a href="#一：查看cpu" class="headerlink" title="一：查看cpu"></a>一：查看cpu</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">more /proc/cpuinfo | grep "model name"</div><div class="line"></div><div class="line">grep "model name" /proc/cpuinfo</div></pre></td></tr></table></figure>
+<p>如果觉得需要看的更加舒服</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep "model name" /proc/cpuinfo | cut -f2 -d:</div></pre></td></tr></table></figure>
+<h2 id="二：查看内存"><a href="#二：查看内存" class="headerlink" title="二：查看内存"></a>二：查看内存</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grep MemTotal /proc/meminfo</div><div class="line"></div><div class="line">grep MemTotal /proc/meminfo | cut -f2 -d:</div><div class="line"></div><div class="line">free -m |grep &quot;Mem&quot; | awk &apos;&#123;print $2&#125;&apos;</div></pre></td></tr></table></figure>
+<h2 id="三：查看cpu是32位还是64位"><a href="#三：查看cpu是32位还是64位" class="headerlink" title="三：查看cpu是32位还是64位"></a>三：查看cpu是32位还是64位</h2><p>查看CPU位数(32 or 64)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getconf LONG_BIT</div></pre></td></tr></table></figure>
+<h2 id="四：查看当前linux的版本"><a href="#四：查看当前linux的版本" class="headerlink" title="四：查看当前linux的版本"></a>四：查看当前linux的版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">more /etc/redhat-release</div><div class="line"></div><div class="line">cat /etc/redhat-release</div></pre></td></tr></table></figure>
+<h2 id="五：查看内核版本"><a href="#五：查看内核版本" class="headerlink" title="五：查看内核版本"></a>五：查看内核版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uname -r</div><div class="line"></div><div class="line">uname -a</div></pre></td></tr></table></figure>
+<h2 id="六：查看当前时间"><a href="#六：查看当前时间" class="headerlink" title="六：查看当前时间"></a>六：查看当前时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">date</div></pre></td></tr></table></figure>
+<p>上面已经介绍如何同步时间了，</p>
+<h2 id="七：查看硬盘和分区"><a href="#七：查看硬盘和分区" class="headerlink" title="七：查看硬盘和分区"></a>七：查看硬盘和分区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df -h</div><div class="line"></div><div class="line">fdisk -l</div></pre></td></tr></table></figure>
+<p>也可以查看分区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du -sh</div></pre></td></tr></table></figure></p>
+<p>可以看到全部占用的空间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du /etc -sh</div></pre></td></tr></table></figure></p>
+<p>可以看到这个目录的大小</p>
+<h2 id="八：查看安装的软件包"><a href="#八：查看安装的软件包" class="headerlink" title="八：查看安装的软件包"></a>八：查看安装的软件包</h2><p>查看系统安装的时候装的软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cat -n /root/install.log</div><div class="line"></div><div class="line">more /root/install.log | wc -l</div></pre></td></tr></table></figure></p>
+<p>查看现在已经安装了那些软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rpm -qa</div><div class="line"></div><div class="line">rpm -qa | wc -l</div><div class="line"></div><div class="line">yum list installed | wc -l</div></pre></td></tr></table></figure></p>
+<p>不过很奇怪，我通过rpm，和yum这两种方式查询的安装软件包，数量并不一样。没有找到原因。</p>
+<h2 id="九：查看键盘布局"><a href="#九：查看键盘布局" class="headerlink" title="九：查看键盘布局"></a>九：查看键盘布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysconfig/keyboard</div><div class="line"></div><div class="line">cat /etc/sysconfig/keyboard | grep KEYTABLE | cut -f2 -d=</div></pre></td></tr></table></figure>
+<h2 id="十：查看selinux情况"><a href="#十：查看selinux情况" class="headerlink" title="十：查看selinux情况"></a>十：查看selinux情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sestatus</div><div class="line"></div><div class="line">sestatus | cut -f2 -d:</div><div class="line"></div><div class="line">cat /etc/sysconfig/selinux</div></pre></td></tr></table></figure>
+<h2 id="十一：查看ip，mac地址"><a href="#十一：查看ip，mac地址" class="headerlink" title="十一：查看ip，mac地址"></a>十一：查看ip，mac地址</h2><p>在ifcfg-eth0 文件里你可以看到mac，网关等信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ifconfig</div><div class="line"></div><div class="line">cat /etc/sysconfig/network-scripts/ifcfg-eth0 | grep IPADDR</div><div class="line"></div><div class="line">cat /etc/sysconfig/network-scripts/ifcfg-eth0 | grep IPADDR | cut -f2 -d=</div><div class="line"></div><div class="line">ifconfig eth0 |grep &quot;inet addr:&quot; |awk &apos;&#123;print $2&#125;&apos;|cut -c 6-</div><div class="line"></div><div class="line">ifconfig   | grep &apos;inet addr:&apos;| grep -v &apos;127.0.0.1&apos; | cut -d: -f2 | awk &apos;&#123; print $1&#125;&apos;</div></pre></td></tr></table></figure></p>
+<p>查看网关<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysconfig/network</div></pre></td></tr></table></figure></p>
+<p>查看dns<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/resolv.conf</div></pre></td></tr></table></figure></p>
+<h2 id="十二：查看默认语言"><a href="#十二：查看默认语言" class="headerlink" title="十二：查看默认语言"></a>十二：查看默认语言</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo $LANG $LANGUAGE</div><div class="line"></div><div class="line">cat /etc/sysconfig/i18n</div></pre></td></tr></table></figure>
+<h2 id="十三：查看所属时区和是否使用UTC时间"><a href="#十三：查看所属时区和是否使用UTC时间" class="headerlink" title="十三：查看所属时区和是否使用UTC时间"></a>十三：查看所属时区和是否使用UTC时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysconfig/clock</div></pre></td></tr></table></figure>
+<h2 id="十四：查看主机名"><a href="#十四：查看主机名" class="headerlink" title="十四：查看主机名"></a>十四：查看主机名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hostname</div><div class="line"></div><div class="line">cat /etc/sysconfig/network</div></pre></td></tr></table></figure>
+<p>修改主机名就是修改这个文件，同时最好也把host文件也修改。</p>
+<p>查看pci信息    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">查看硬盘信息  ```df -lh</div></pre></td></tr></table></figure></p>
+<p><code>curl --head www.163.com               查看163.com的服务器环境</code></p>
+<p><code>uptime</code>              查看开机时间多长</p>
+<p><code>ifconfig eth0 up</code>   启用网卡eth0</p>
+<p><code>/etc/initd/network restart</code> 重启网络服务</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/24/Fate/" rel="next" title="命运">
+                <i class="fa fa-chevron-left"></i> 命运
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/21/wisdom-knowledge/" rel="prev" title="知识与智慧">
+                知识与智慧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="Lim Li" />
+          <p class="site-author-name" itemprop="name">Lim Li</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：查看cpu"><span class="nav-text">一：查看cpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：查看内存"><span class="nav-text">二：查看内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：查看cpu是32位还是64位"><span class="nav-text">三：查看cpu是32位还是64位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：查看当前linux的版本"><span class="nav-text">四：查看当前linux的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五：查看内核版本"><span class="nav-text">五：查看内核版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六：查看当前时间"><span class="nav-text">六：查看当前时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七：查看硬盘和分区"><span class="nav-text">七：查看硬盘和分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八：查看安装的软件包"><span class="nav-text">八：查看安装的软件包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九：查看键盘布局"><span class="nav-text">九：查看键盘布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十：查看selinux情况"><span class="nav-text">十：查看selinux情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一：查看ip，mac地址"><span class="nav-text">十一：查看ip，mac地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二：查看默认语言"><span class="nav-text">十二：查看默认语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三：查看所属时区和是否使用UTC时间"><span class="nav-text">十三：查看所属时区和是否使用UTC时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四：查看主机名"><span class="nav-text">十四：查看主机名</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lim Li</span>
+
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
